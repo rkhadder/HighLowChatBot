@@ -6,6 +6,7 @@ var builder = require('botbuilder');
 
 // Application vars
 var startIntentRegEx = /play\s+high\s+low/i
+var endIntentRegEx = /end\s+game/i
 
 // endpoints
 var bot = new builder.BotConnectorBot({appId: 'highlowchatbot', appSecret: 'e417a887dc7143fa91f4469eb2177223'});
@@ -24,6 +25,9 @@ bot.add('/max-num', [
 	},
 	function (session, results) {
 		var max = results.response;
+		if (max == -1)
+			session.endDialog("Game ended")
+
 		session.userData.max = max;
 		session.userData.num = Math.ceil(Math.random() * max)
 		session.userData.round = 1;
@@ -46,6 +50,9 @@ bot.add('/round', [
 		var round = session.userData.round;
 		var target = session.userData.num;
 		var guess = results.response;
+
+		if (guess == -1)
+			session.endDialog("Game ended")
 		
 		// high/low logic
 		if (guess === target) { // Winning Case
