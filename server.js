@@ -8,7 +8,7 @@ var builder = require('botbuilder');
 var startIntentRegEx = /play\s+high\s+low/i
 
 // endpoints
-var bot = new builder.BotConnectorBot({appId: 'Squad', appSecret: '91606fa3e08e456a9b22c244c2589cbf'});
+var bot = new builder.BotConnectorBot({appId: 'highlowchatbot', appSecret: 'e417a887dc7143fa91f4469eb2177223'});
 bot.add('/', function(session) {
 
 	var text = session.message.text;
